@@ -19,19 +19,12 @@ namespace Vizz
 {
 	public class VizzVisualizer : DialogDebuggerVisualizer
 	{
-		protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
+		protected override void Show(
+			IDialogVisualizerService windowService,
+			IVisualizerObjectProvider objectProvider)
 		{
-			var collection = objectProvider.GetObject() as IEnumerable;
-
-			if(collection == null)
-				return;
-
-			List<object> values = new List<object>();
-
-			foreach(object item in collection)
-				values.Add(item);
-
-			windowService.ShowDialog(new VizzWindow(values));
+			if (objectProvider.GetObject() is IEnumerable collection)
+				windowService.ShowDialog(new VizzWindow(collection));
 		}
 	}
 }

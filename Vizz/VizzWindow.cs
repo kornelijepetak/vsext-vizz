@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Vizz
 {
+	using System.Collections;
 	using System.Reflection;
 	using System.Windows.Forms;
 	using System.Windows.Forms.DataVisualization.Charting;
@@ -24,12 +25,12 @@ namespace Vizz
 
 		private SeriesChartType type;
 
-		public VizzWindow(List<object> values)
+		public VizzWindow(IEnumerable values)
 		{
 			if(values == null)
 				return;
 
-			this.values = values;
+			this.values = values.Cast<object>().ToList(); 
 			type = SeriesChartType.Column;
 
 			initializeComponents();
